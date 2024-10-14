@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Foglalás</title>
+</head>
+
+<body>
+  <div class="container my-5">
+    <h1>Foglalási adatlap</h1>
+    <form method="post" action="/reservation">
+      <div class="form-group">
+        <label for="nev">Név</label>
+        <input type="text" name="nev" class="form-control" id="nev" placeholder="Név megadása" required>
+        <small class="form-text text-muted">kötelező</small>
+      </div>
+      <div class="form-group">
+        <label for="email">Email cím</label>
+        <input type="email"  name="email" class="form-control" id="email" placeholder="Email cím megadása" required>
+        <small class="form-text text-muted">kötelező, a @ jel előtt és után legyen min. 1-1 karakter pl. abc@def.hu</small>
+      </div>
+      <div class="form-group">
+        <label for="datum">Dátum</label>
+        <input type="date" name="datum" class="form-control" id="datum" placeholder="Dátum választás" required>
+        <small class="form-text text-muted">kötelező, az aktuális dátumnál nem lehet régebbi</small>
+      </div>
+      <div class="form-group">
+        <label for="nezok">Nézők</label>
+        <input type="text" name="nezok" class="form-control" id="nezok" placeholder="Nézők száma" required>
+        <small class="form-text text-muted">kötelező, minimum 1 és maximum 10 fő</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>

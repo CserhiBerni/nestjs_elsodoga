@@ -18,14 +18,14 @@ export class AppController {
   @Get('reservation')
   @Render('reservation')
   getReservation() {
-    return { errors: [] };
+    return { errors: [], resData: { nev: "", email: "", datum: "", nezok: "" } };
   }
 
   @Post('reservation')
   postReservation(@Body() reservationDto: ReservationDto, @Res() response: Response) {
     const nev = reservationDto.nev;
     const email = reservationDto.email;
-    const datum = reservationDto.datum;
+    const datum = Date.parse(reservationDto.datum);
     const nezok = Number(reservationDto.nezok);
 
     const errors = [];
@@ -34,11 +34,28 @@ export class AppController {
     if (emailArr[0].length < 1 || emailArr[1].length < 1) {
       errors.push("Email cím nem megfelelő hosszúságú")
     }
-    
-    let datumArr = datum.split("-")
-    const currentDate = new Date()
-    if(Number(datumArr[0]) < currentDate.getFullYear() ) {
-      
+
+    if (datum < Date.now()) {
+      errors.push("A dátum nem lehet a múltban")
+    }
+
+    if (nezok > 10 || nezok < 1) {
+      errors.push("Nem megfelelő nézőszám")
+    }
+
+    if (errors.length > 0) {
+      const resData = { nev: nev, email: email, datum: reservationDto.datum, nezok: nezok }
+      response.render('reservation', { errors: errors, resData: resData })
+    }
+    else {
+      response.redirect('/success')
     }
   }
+
+  @Get('success')
+  @Render('success')
+  getSuccess() {
+    return;
+  }
 }
+

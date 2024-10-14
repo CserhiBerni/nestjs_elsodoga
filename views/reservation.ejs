@@ -12,29 +12,36 @@
 <body>
   <div class="container my-5">
     <h1>Foglalási adatlap</h1>
-    <form method="post" action="/reservation">
+    <form method="post">
       <div class="form-group">
         <label for="nev">Név</label>
-        <input type="text" name="nev" class="form-control" id="nev" placeholder="Név megadása" required>
+        <input type="text" name="nev" class="form-control" id="nev" placeholder="Név megadása" value="<%= resData.nev %>" required>
         <small class="form-text text-muted">kötelező</small>
       </div>
       <div class="form-group">
         <label for="email">Email cím</label>
-        <input type="email"  name="email" class="form-control" id="email" placeholder="Email cím megadása" required>
+        <input type="email"  name="email" class="form-control" id="email" placeholder="Email cím megadása" value="<%= resData.email %>" required>
         <small class="form-text text-muted">kötelező, a @ jel előtt és után legyen min. 1-1 karakter pl. abc@def.hu</small>
       </div>
       <div class="form-group">
         <label for="datum">Dátum</label>
-        <input type="date" name="datum" class="form-control" id="datum" placeholder="Dátum választás" required>
+        <input type="date" name="datum" class="form-control" id="datum" placeholder="Dátum választás" value="<%= resData.datum %>" required>
         <small class="form-text text-muted">kötelező, az aktuális dátumnál nem lehet régebbi</small>
       </div>
       <div class="form-group">
         <label for="nezok">Nézők</label>
-        <input type="text" name="nezok" class="form-control" id="nezok" placeholder="Nézők száma" required>
+        <input type="text" name="nezok" class="form-control" id="nezok" placeholder="Nézők száma" value="<%= resData.nezok %>" required>
         <small class="form-text text-muted">kötelező, minimum 1 és maximum 10 fő</small>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </form><br>
+    <% if(errors) { %>
+      <% for(let i = 0; i < errors.length; i++) { %>
+        <div class="alert alert-danger" role="alert">
+          <%= errors[i] %>
+        </div>
+      <% } %>
+    <% } %>
   </div>
 </body>
 
